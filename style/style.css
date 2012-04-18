@@ -1,0 +1,281 @@
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 3.0 License
+
+Name       : Undisclosed
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20120130
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: underline;
+	color: #DB4A4A;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+body {
+	line-height: 1.75em;
+	background: #222424 url(img01.gif) repeat-x top left;
+	color: #C0C1C1;
+	font-size: 11.5pt;
+}
+
+body,input {
+	font-family: Tahoma, sans-serif;
+}
+
+br.clearfix {
+	clear: both;
+}
+
+h1,h2,h3,h4 {
+	text-transform: uppercase;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 1.75em;
+}
+
+h2,h3,h4 {
+	color: #FFF;
+	font-family: Oswald, sans-serif;
+	margin-bottom: 1.25em;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
+h4 {
+	font-size: 1.25em;
+}
+
+img.alignleft {
+	margin: 5px 20px 20px 0;
+	float: left;
+	position: relative;
+	top: -10px;
+}
+
+img.aligntop {
+	margin: 5px 0 20px 0;
+}
+
+img.border {
+	padding: 5px;
+	border: solid 1px #D6D6D6;
+}
+
+p {
+	margin-bottom: 1.5em;
+}
+
+ul {
+	margin-bottom: 1.5em;
+}
+
+ul h4 {
+	margin-bottom: 0.35em;
+}
+
+#content {
+	float: left;
+	padding: 40px;
+	background: #FFF;
+	width: 899px;
+	color: #4D4D4D;
+}
+
+#content h2, #content h3, #content h4 {
+	color: #0F0F0F;
+}
+
+#content strong {
+	color: #0F0F0F;
+}
+
+#footer {
+	padding: 70px 0 110px 0;
+	text-align: center;
+	margin: 0 0 45px 0;
+}
+
+#footer a {
+	color: #C0C1C1;
+}
+
+#header {
+	height: 110px;
+	position: relative;
+	padding-bottom: 40px;
+}
+
+#logo {
+	margin: -20px auto;
+	height: 110px;
+	line-height: 110px;
+	text-align: center;
+	position: relative;
+}
+
+#logo a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#logo h1 {
+	font-size: 2.8em;
+	font-family: Oswald, sans-serif;
+}
+
+#menu {
+	line-height: 55px;
+	position: absolute;
+	bottom: 0;
+	height: 55px;
+	background: #AF1E1E url(img02.gif) repeat-x top left;
+	left: 0;
+	font-family: Oswald, sans-serif;
+	width: 980px;
+	border-top: solid 1px #FF9696;
+	border-bottom: solid 1px #9B0A0A;
+}
+
+#menu a {
+	font-size: 1.1em;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #FFFFFF;
+}
+
+#menu ul {
+	width: 980px;
+	list-style: none;
+	text-align: center;
+}
+
+#menu ul li {
+	text-align: center;
+	padding: 8px 15px 8px 15px;
+	margin: 0 5px 0 5px;
+	display: inline;
+}
+
+#menu ul li.current_page_item {
+	background: #912727;
+	border-top: solid 1px #9B0A0A;
+	border-bottom: solid 1px #FF9696;
+}
+
+#page {
+	position: relative;
+	margin: 0 0 0 0;
+	width: 980px;
+	padding: 0;
+}
+
+#page .section-list {
+	padding-left: 0;
+	list-style: none;
+}
+
+#page .section-list li {
+	padding: 25px 0 25px 0;
+	clear: both;
+}
+
+#page ul {
+	list-style: none;
+}
+
+#page ul li {
+	padding: 10px 0 10px 0;
+	border-top: solid 1px #D6D6D6;
+}
+
+#page ul li.first {
+	border-top: 0;
+	padding-top: 0;
+}
+
+#post1 {
+	overflow: hidden;
+	margin: 0 0 30px 0;
+}
+
+#post2 {
+	margin: 0 0 30px 0;
+	overflow: hidden;
+}
+
+#post3 {
+	overflow: hidden;
+}
+
+#search input.form-submit {
+	color: #FFF;
+	background: #CD3C3C;
+	margin-left: 1em;
+	font-family: Oswald, sans-serif;
+	border: 0;
+	padding: 5px;
+}
+
+#search input.form-text {
+	padding: 10px;
+	border: solid 1px #2C2E2E;
+}
+
+#sidebar {
+	border-bottom: solid 1px #102424;
+	background: #384C4C url(img03.gif) repeat-y top left;
+	width: 225px;
+	padding: 40px;
+	margin: 0 0 0 675px;
+	color: #CAD5D5;
+}
+
+#sidebar h2, #sidebar h3, #sidebar h4 {
+	color: #FFFFFF;
+}
+
+#sidebar a {
+	color: #EF7A7A;
+}
+
+#sidebar ul {
+	list-style: none;
+	margin-bottom: 2em;
+}
+
+#sidebar ul li {
+	padding: 10px 0 10px 0;
+	border-top: solid 1px #5E8383;
+	border-bottom: solid 1px #182C2C;
+}
+
+#sidebar ul li.first {
+	padding-top: 0;
+	border-top: 0;
+}
+
+#sidebar ul li.last {
+	border-bottom: 0;
+}
+
+#wrapper {
+	width: 980px;
+	position: relative;
+	margin: 0 auto 0 auto;
+}
