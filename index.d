@@ -1,8 +1,8 @@
 import std.stdio;
+import WebSite;
 
 void main()
 {
-  writeln("Content-type: text/html");
-  writeln("");
-  writeln("test");
+  WebSite webSite = new WebSite();
+  webSite.Main();
 }
