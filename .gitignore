@@ -1,6 +1,11 @@
+# Large files and particular website content.
 db/*
+# Backup files.
 #*#
 #*.*#
 *~
 .#*
 *.d#
+# Binary files.
+*.o
+index
