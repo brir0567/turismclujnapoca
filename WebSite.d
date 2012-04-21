@@ -1,6 +1,7 @@
 import std.stdio;
 import std.file;
 import Config;
+import Thumbnailer;
 
 class WebSite
 {
@@ -114,11 +115,32 @@ class WebSite
   private char[] getDirectory_Images(string directory)
   {
     char[] result;
-    foreach (string imageFile; std.file.dirEntries(directory, "*.{JPG,jpg}", SpanMode.shallow))
+    foreach (string imageFilename; std.file.dirEntries(directory, "*.{JPG,jpg}", SpanMode.shallow))
     {
-      result ~= imageFile;
-      result ~= "<br/>\n";
+      result ~= getImage(imageFilename);
+    }
+    return result;
+  }  
+
+  private char[] getImage(string imageFilename)
+  {
+    char[] result;
+    string thumbFilename = imageFilename ~ "_thm.png";
+    if (!std.file.exists(thumbFilename))
+    {
+      Thumbnailer thumbnailer = new Thumbnailer();
+      thumbnailer.generateThumbnail(imageFilename, thumbFilename);
+    }
+    if (!std.file.exists(thumbFilename))
+    {
+      result ~= `<p><img class="dbimage" src="` ~ thumbFilename ~ `" /></p>` ~ "\n";
+      string textFilename = imageFilename ~ ".txt";
+      if (std.file.exists(textFilename))
+	{
+	  result ~= `<p>` ~ std.file.readText(textFilename).dup ~ `</p>`;
+	}
     }
     return result;
   }
+
 }
