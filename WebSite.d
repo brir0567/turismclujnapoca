@@ -1,5 +1,6 @@
 import std.stdio;
 import std.file;
+import Config;
 
 class WebSite
 {
@@ -24,6 +25,7 @@ class WebSite
     content ~= "Content-type: text/html\n\n".dup;
     content ~= getHeader().dup;
     content ~= "test".dup;
+    content ~= getMainContent();
     content ~= getFooter().dup;
 
     result = content.idup;
@@ -43,4 +45,33 @@ class WebSite
     result = std.file.readText("template/footer.htemplate").dup;
     return result;
   }
+
+  private char[] getMainContent()
+  {
+    char[] result;
+
+    result ~= getDBDescription().dup;
+    result ~= getAllDirectories().dup;
+    return result;
+  }
+
+  private char[] getDBDescription()
+  {
+    char[] result;
+    Config config = new Config();
+    char[] filename = config.dbDirectory.dup ~ "before.txt";
+    if (std.file.exists(filename))
+    {
+      result = std.file.readText(filename).dup;
+    }
+    return result;
+  }
+
+  private char[] getAllDirectories()
+  {
+    char[] result;
+
+    return result;
+  }
+
 }
