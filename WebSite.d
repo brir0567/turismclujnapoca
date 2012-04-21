@@ -24,7 +24,6 @@ class WebSite
 
     content ~= "Content-type: text/html\n\n".dup;
     content ~= getHeader().dup;
-    content ~= "test".dup;
     content ~= getMainContent();
     content ~= getFooter().dup;
 
@@ -70,8 +69,56 @@ class WebSite
   private char[] getAllDirectories()
   {
     char[] result;
-
+    Config config = new Config();
+    foreach (DirEntry e; std.file.dirEntries(config.dbDirectory, SpanMode.shallow))
+    {
+      if (e.isDir)
+      {
+	result ~= getDirectory(e.name);
+      }
+    }
     return result;
   }
 
+  private char[] getDirectory(string directory)
+  {
+    char[] result;
+    result ~= getDirectory_Before(directory);
+    result ~= getDirectory_Images(directory);
+    result ~= getDirectory_After(directory);
+    return result;
+  }
+
+  private char[] getDirectory_Before(string directory)
+  {
+    char[] result;
+    string filename = directory ~ "before.txt";
+    if (std.file.exists(filename))
+    {
+      result = std.file.readText(filename).dup;
+    }
+    return result;
+  } 
+
+  private char[] getDirectory_After(string directory)
+  {
+    char[] result;
+    string filename = directory ~ "after.txt";
+    if (std.file.exists(filename))
+    {
+      result = std.file.readText(filename).dup;
+    }
+    return result;
+  }  
+
+  private char[] getDirectory_Images(string directory)
+  {
+    char[] result;
+    foreach (string imageFile; std.file.dirEntries(directory, "*.{JPG,jpg}", SpanMode.shallow))
+    {
+      result ~= imageFile;
+      result ~= "<br/>\n";
+    }
+    return result;
+  }
 }
