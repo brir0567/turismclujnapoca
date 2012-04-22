@@ -2,6 +2,7 @@ import std.stdio;
 import std.file;
 import Config;
 import Thumbnailer;
+import Log;
 
 class WebSite
 {
@@ -11,6 +12,7 @@ class WebSite
     {
       string replyContent = getReplyContent();
       writeln(replyContent);
+      writeln(getLogEntries());
     } 
     catch (Exception e) 
     {
@@ -141,6 +143,11 @@ class WebSite
 	}
     }
     return result;
+  }
+
+  private char[] getLogEntries()
+  {
+    return contentOfLog;
   }
 
 }
