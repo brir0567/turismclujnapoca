@@ -95,7 +95,7 @@ class WebSite
   private char[] getDirectory_Before(string directory)
   {
     char[] result;
-    string filename = directory ~ "before.txt";
+    string filename = directory ~ "/before.txt";
     if (std.file.exists(filename))
     {
       result = std.file.readText(filename).dup;
@@ -106,7 +106,7 @@ class WebSite
   private char[] getDirectory_After(string directory)
   {
     char[] result;
-    string filename = directory ~ "after.txt";
+    string filename = directory ~ "/after.txt";
     if (std.file.exists(filename))
     {
       result = std.file.readText(filename).dup;
