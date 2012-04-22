@@ -11,8 +11,9 @@ class Thumbnailer
           -thumbnail 400x400   -unsharp 0x.5  %s.gif && \
 convert -page +4+4 %s.gif -matte \
           \( +clone -background black -shadow 60x4+4+4 \) +swap \
-          -background none -mosaic     %s`, 
-					     imageFilename, imageFilename, imageFilename, thumbnailFilename);
+          -background none -mosaic     %s && \
+rm %s.gif`, 
+					      imageFilename, imageFilename, imageFilename, thumbnailFilename, imageFilename);
       std.process.system(commandLines);
       info(commandLines);
     }

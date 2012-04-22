@@ -12,11 +12,11 @@
 <div id="wrapper">
 	<div id="header">
 		<div id="logo">
-			<h1><a href="index.php">Turism Cluj-Napoca</a></h1>
+			<h1><a href="index.html">Turism Cluj-Napoca</a></h1>
 		</div>
 		<div id="menu">
 			<ul>
-				<li class="first current_page_item"><a href="index.php">Homepage</a></li>
+				<li class="first current_page_item"><a href="index.html">Homepage</a></li>
 				<!--
 				<li><a href="gallery/viewgallery.php">Photos</a></li>
 				<li><a href="about.php">About</a></li>

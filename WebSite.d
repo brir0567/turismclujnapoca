@@ -133,9 +133,11 @@ class WebSite
       Thumbnailer thumbnailer = new Thumbnailer();
       thumbnailer.generateThumbnail(imageFilename, thumbFilename);
     }
-    if (!std.file.exists(thumbFilename))
+    if (std.file.exists(thumbFilename))
     {
-      result ~= `<p><img class="dbimage" src="` ~ thumbFilename ~ `" /></p>` ~ "\n";
+      result ~= std.string.format(`<p><a href="%s" target="_blank"><img class="dbimage" src="%s" /></a></p>
+`,
+				  imageFilename, thumbFilename);
       string textFilename = imageFilename ~ ".txt";
       if (std.file.exists(textFilename))
 	{
