@@ -15,7 +15,8 @@ convert -page +4+4 %s.gif -matte \
 rm %s.gif`, 
 					      imageFilename, imageFilename, imageFilename, thumbnailFilename, imageFilename);
       std.process.system(commandLines);
-      info(commandLines);
+      info(std.string.format("Generated thumbnail '%s' for image '%s'.",
+			     thumbnailFilename, imageFilename));
     }
   }
 }

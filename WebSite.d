@@ -61,7 +61,7 @@ class WebSite
   {
     char[] result;
     Config config = new Config();
-    char[] filename = config.dbDirectory.dup ~ "before.txt";
+    char[] filename = config.dbDirectory.dup ~ "/before.txt";
     if (std.file.exists(filename))
     {
       result = std.file.readText(filename).dup;
@@ -140,9 +140,9 @@ class WebSite
 				  imageFilename, thumbFilename);
       string textFilename = imageFilename ~ ".txt";
       if (std.file.exists(textFilename))
-	{
-	  result ~= `<p>` ~ std.file.readText(textFilename).dup ~ `</p>`;
-	}
+      {
+	result ~= `<p>` ~ std.file.readText(textFilename).dup ~ `</p>`;
+      }
     }
     return result;
   }
