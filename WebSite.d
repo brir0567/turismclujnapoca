@@ -3,6 +3,7 @@ import std.file;
 import Config;
 import Thumbnailer;
 import Log;
+import Directory;
 
 class WebSite
 {
@@ -48,26 +49,17 @@ class WebSite
     return result;
   }
 
-  private char[] getMainContent()
+  private string getMainContent()
   {
-    char[] result;
+    string result;
 
+    Database database = new Database();
+    result ~= database.getMainContent();
     result ~= getDBDescription().dup;
     result ~= getAllDirectories().dup;
     return result;
   }
 
-  private char[] getDBDescription()
-  {
-    char[] result;
-    Config config = new Config();
-    char[] filename = config.dbDirectory.dup ~ "/before.txt";
-    if (std.file.exists(filename))
-    {
-      result = std.file.readText(filename).dup;
-    }
-    return result;
-  }
 
   private string getTableOfContents()
   {

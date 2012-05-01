@@ -26,12 +26,6 @@ class Database
   private string getBeforeHtml()
   {
     FileUtils fileUtils = new FileUtils();
-    return string result = "";
-    string filename = baseDirectory ~ "/before.txt";
-    if (std.file.exists(filename))
-    {
-      result ~= std.file.readText(filename).dup;
-    }
-    return result;
+    return fileutils.ReadFileContents(baseDirectory ~ "/before.txt");
   }
 }
