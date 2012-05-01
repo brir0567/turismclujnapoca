@@ -55,8 +55,8 @@ class WebSite
 
     Database database = new Database();
     result ~= database.getMainContent();
-    result ~= getDBDescription().dup;
-    result ~= getAllDirectories().dup;
+    //result ~= getDBDescription().dup;
+    //result ~= getAllDirectories().dup;
     return result;
   }
 

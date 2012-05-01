@@ -2,6 +2,7 @@
 class Database
 {
   private string baseDirectory;
+
   public Database(string baseDirectory)
   {
     this.baseDirectory = baseDirectory;
@@ -18,14 +19,29 @@ class Database
     string result = "";
     result ~= getTitleHtml();
     result ~= getBeforeHtml();
-    result ~= getAllDirectoriesHtml();
+    //result ~= getAllDirectoriesHtml();
     result ~= getAfterHtml();
-    rturn result;
-}
+    return result;
+  }
+
+  private string getTitleHtml(ref string title)
+  {
+    string result = "";
+    FileUtils fileUtils = new FileUtils();
+    title = fileutils.ReadFileContents(baseDirectory ~ "/title.txt");
+    result = title;
+    return result;
+  }
 
   private string getBeforeHtml()
   {
     FileUtils fileUtils = new FileUtils();
     return fileutils.ReadFileContents(baseDirectory ~ "/before.txt");
+  }
+
+  private string getAfterHtml()
+  {
+    FileUtils fileUtils = new FileUtils();
+    return fileutils.ReadFileContents(baseDirectory ~ "/after.txt");
   }
 }
