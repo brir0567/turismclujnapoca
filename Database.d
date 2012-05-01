@@ -37,6 +37,7 @@ class Database
   private string getTableOfContentsHtml()
   {
     string result = "";
+    result ~= `<div id="toc">`;
     Config config = new Config();
     foreach (DirEntry e; std.file.dirEntries(config.dbDirectory, SpanMode.shallow))
     {
@@ -49,6 +50,7 @@ class Database
 	result ~= std.string.format("<a href=\"#%s\">%s</a><br/>", titleUrlencoded, title);
       }
     }
+    result ~= `</div>`;
     return result;
   }
 

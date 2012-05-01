@@ -86,7 +86,7 @@ class Directory
       string textFilename = imageFilename ~ ".txt";
       if (std.file.exists(textFilename))
       {
-	result ~= `<p>` ~ std.file.readText(textFilename).dup ~ `</p>`;
+	result ~= `<p class="img_text">` ~ std.file.readText(textFilename).dup ~ `</p>`;
       }
     }
     return result;

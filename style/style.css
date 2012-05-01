@@ -284,3 +284,7 @@ img.dbimage {
     max-height: 300px;
     max-width: 300px;
 }
+
+div#toc {
+    float: right;
+}

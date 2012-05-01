@@ -7,6 +7,15 @@
 <title>Turism Cluj-Napoca</title>
 <link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="style/style.css" />
+<script language="javascript" type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery.truncator.js"></script>
+<script language="javascript" type="text/javascript">
+
+  $(function() {
+    $('.img_text').truncate({max_length: 240});
+  });
+
+</script>
 </head>
 <body>
 <div id="wrapper">
