@@ -46,7 +46,7 @@ class Database
 	string title = directory.getTitle();
 	UrlEncode urlEncode = new UrlEncode();
 	string titleUrlencoded = urlEncode.encode(title);
-	result ~= std.string.format("<a href=\"%s\">%s</a><br/>", titleUrlencoded, title); //getDirectory(e.name);
+	result ~= std.string.format("<a href=\"#%s\">%s</a><br/>", titleUrlencoded, title);
       }
     }
     return result;

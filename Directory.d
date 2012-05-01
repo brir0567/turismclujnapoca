@@ -1,6 +1,7 @@
 import FileUtils;
 import Thumbnailer;
 import std.file;
+import UrlEncode;
 
 class Directory
 {
@@ -39,9 +40,10 @@ class Directory
   private string getTitleHtml(ref string title)
   {
     string result = "";
-    FileUtils fileUtils = new FileUtils();
-    title = fileUtils.ReadFileContents(baseDirectory ~ "/title.txt");
-    result = title;
+    title = getTitle();
+    UrlEncode urlEncode = new UrlEncode();
+    string titleUrlencoded = urlEncode.encode(title);
+    result = std.string.format("<h2 id=\"%s\">%s</h2>", titleUrlencoded, title);
     return result;
   }
 
