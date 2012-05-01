@@ -9,3 +9,5 @@ db/*
 # Binary files.
 *.o
 index
+# Emacs
+TAGS

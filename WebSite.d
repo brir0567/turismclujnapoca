@@ -69,10 +69,24 @@ class WebSite
     return result;
   }
 
+  private string getTableOfContents()
+  {
+    string result = "";
+    foreach (DirEntry e; std.file.dirEntries(config.dbDirectory, SpanMode.shallow))
+    {
+      if (e.isDir)
+      {
+	result ~= std.string.format("<a href=\"%s\">%s</a>", e.name, e.name); //getDirectory(e.name);
+      }
+    }
+  }
+
   private char[] getAllDirectories()
   {
     char[] result;
     Config config = new Config();
+    
+
     foreach (DirEntry e; std.file.dirEntries(config.dbDirectory, SpanMode.shallow))
     {
       if (e.isDir)
@@ -86,6 +100,7 @@ class WebSite
   private char[] getDirectory(string directory)
   {
     char[] result;
+    result ~= std.string.format("<a name=\"%s\">", directory);
     result ~= getDirectory_Before(directory);
     result ~= getDirectory_Images(directory);
     result ~= getDirectory_After(directory);
