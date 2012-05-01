@@ -63,15 +63,16 @@ class Directory
   private string getDirectory_ImagesHtml()
   {
     string result;
-    auto imagesList = std.file.dirEntries(baseDirectory, "*.{JPG,jpg}", SpanMode.shallow);
-    result ~= typeid(typeof(imagesList)).toString();
+    string[] imagesList;
+    //result ~= typeid(typeof(imagesList)).toString();
     //std.algorithm.sort!("a.name < b.name")(imagesList);
-    foreach (imageFile; imagesList)
+    foreach (imageFile; std.file.dirEntries(baseDirectory, "*.{JPG,jpg}", SpanMode.shallow))
     {
-      if (!imageFile.isDir)
-      {
-	result ~= getImageHtml(imageFile.name);
-      }
+      imagesList ~= imageFile.name;
+    }
+    foreach (imageFilename; imagesList.sort)
+    {
+      result ~= getImageHtml(imageFilename);
     }
     return result;
   }  
