@@ -1,4 +1,8 @@
 import FileUtils;
+import Config;
+import std.file;
+import Directory;
+
 
 class Database
 {
@@ -24,8 +28,37 @@ class Database
     string title = "";
     result ~= getTitleHtml(title);
     result ~= getBeforeHtml();
-    //result ~= getAllDirectoriesHtml();
+    result ~= getAllDirectoriesHtml();
     result ~= getAfterHtml();
+    return result;
+  }
+
+  private string getTableOfContentsHtml()
+  {
+    string result = "";
+    Config config = new Config();
+    foreach (DirEntry e; std.file.dirEntries(config.dbDirectory, SpanMode.shallow))
+    {
+      if (e.isDir)
+      {
+	result ~= std.string.format("<a href=\"%s\">%s</a>", e.name, e.name); //getDirectory(e.name);
+      }
+    }
+    return result;
+  }
+
+  private char[] getAllDirectoriesHtml()
+  {
+    char[] result;
+    foreach (DirEntry e; std.file.dirEntries(baseDirectory, SpanMode.shallow))
+    {
+      if (e.isDir)
+      {
+	//result ~= getDirectory(e.name);
+	Directory directory = new Directory(e.name);
+	directory.getMainContentHtml();
+      }
+    }
     return result;
   }
 
@@ -48,7 +81,7 @@ class Database
     string result = "";
     FileUtils fileUtils = new FileUtils();
     title = fileUtils.ReadFileContents(baseDirectory ~ "/title.txt");
-    result = title;
+    result = std.string.format("<h1>%s</h1>", title);
     return result;
   }
 
