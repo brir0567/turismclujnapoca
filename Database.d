@@ -2,7 +2,7 @@ import FileUtils;
 import Config;
 import std.file;
 import Directory;
-
+import UrlEncode;
 
 class Database
 {
@@ -28,6 +28,7 @@ class Database
     string title = "";
     result ~= getTitleHtml(title);
     result ~= getBeforeHtml();
+    result ~= getTableOfContentsHtml();
     result ~= getAllDirectoriesHtml();
     result ~= getAfterHtml();
     return result;
@@ -41,22 +42,25 @@ class Database
     {
       if (e.isDir)
       {
-	result ~= std.string.format("<a href=\"%s\">%s</a>", e.name, e.name); //getDirectory(e.name);
+	Directory directory = new Directory(e.name);
+	string title = directory.getTitle();
+	UrlEncode urlEncode = new UrlEncode();
+	string titleUrlencoded = urlEncode.encode(title);
+	result ~= std.string.format("<a href=\"%s\">%s</a><br/>", titleUrlencoded, title); //getDirectory(e.name);
       }
     }
     return result;
   }
 
-  private char[] getAllDirectoriesHtml()
+  private string getAllDirectoriesHtml()
   {
-    char[] result;
+    string result;
     foreach (DirEntry e; std.file.dirEntries(baseDirectory, SpanMode.shallow))
     {
       if (e.isDir)
       {
-	//result ~= getDirectory(e.name);
 	Directory directory = new Directory(e.name);
-	directory.getMainContentHtml();
+	result ~= directory.getMainContentHtml();
       }
     }
     return result;

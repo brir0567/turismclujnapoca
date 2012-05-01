@@ -28,6 +28,14 @@ class Directory
     return result;
   }
 
+  public string getTitle()
+  {
+    string result = "";
+    FileUtils fileUtils = new FileUtils();
+    result = fileUtils.ReadFileContents(baseDirectory ~ "/title.txt");
+    return result;
+  }
+
   private string getTitleHtml(ref string title)
   {
     string result = "";
