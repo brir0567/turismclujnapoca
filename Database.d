@@ -28,27 +28,23 @@ class Database
     string title = "";
     result ~= getTitleHtml(title);
     result ~= getBeforeHtml();
-    result ~= getTableOfContentsHtml();
     result ~= getAllDirectoriesHtml();
     result ~= getAfterHtml();
     return result;
   }
 
-  private string getTableOfContentsHtml()
+  private string getTableOfContentsHtml(string[] directoriesList)
   {
     string result = "";
     result ~= `<div id="toc">`;
     Config config = new Config();
-    foreach (DirEntry e; std.file.dirEntries(config.dbDirectory, SpanMode.shallow))
+    foreach (directoryFilename; directoriesList)
     {
-      if (e.isDir)
-      {
-	Directory directory = new Directory(e.name);
-	string title = directory.getTitle();
-	UrlEncode urlEncode = new UrlEncode();
-	string titleUrlencoded = urlEncode.encode(title);
-	result ~= std.string.format("<a href=\"#%s\">%s</a><br/>", titleUrlencoded, title);
-      }
+      Directory directory = new Directory(directoryFilename);
+      string title = directory.getTitle();
+      UrlEncode urlEncode = new UrlEncode();
+      string titleUrlencoded = urlEncode.encode(title);
+      result ~= std.string.format("<a href=\"#%s\">%s</a><br/>", titleUrlencoded, title);
     }
     result ~= `</div>`;
     return result;
@@ -57,13 +53,20 @@ class Database
   private string getAllDirectoriesHtml()
   {
     string result;
+    string[] directoriesList;
     foreach (DirEntry e; std.file.dirEntries(baseDirectory, SpanMode.shallow))
     {
       if (e.isDir)
       {
-	Directory directory = new Directory(e.name);
-	result ~= directory.getMainContentHtml();
+	directoriesList ~= e.name;
       }
+    }
+    directoriesList.sort;
+    result ~= getTableOfContentsHtml(directoriesList);
+    foreach (directoryFilename; directoriesList)
+    {
+      Directory directory = new Directory(directoryFilename);
+      result ~= directory.getMainContentHtml();
     }
     return result;
   }
