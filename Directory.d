@@ -2,6 +2,7 @@ import FileUtils;
 import Thumbnailer;
 import std.file;
 import UrlEncode;
+import std.algorithm;
 
 class Directory
 {
@@ -59,12 +60,18 @@ class Directory
     return fileUtils.ReadFileContents(baseDirectory ~ "/after.txt");
   }
 
-  private char[] getDirectory_ImagesHtml()
+  private string getDirectory_ImagesHtml()
   {
-    char[] result;
-    foreach (string imageFilename; std.file.dirEntries(baseDirectory, "*.{JPG,jpg}", SpanMode.shallow))
+    string result;
+    auto imagesList = std.file.dirEntries(baseDirectory, "*.{JPG,jpg}", SpanMode.shallow);
+    result ~= typeid(typeof(imagesList)).toString();
+    //std.algorithm.sort!("a.name < b.name")(imagesList);
+    foreach (imageFile; imagesList)
     {
-      result ~= getImageHtml(imageFilename);
+      if (!imageFile.isDir)
+      {
+	result ~= getImageHtml(imageFile.name);
+      }
     }
     return result;
   }  
