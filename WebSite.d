@@ -3,7 +3,8 @@ import std.file;
 import Config;
 import Thumbnailer;
 import Log;
-import Directory;
+import Config;
+import Database;
 
 class WebSite
 {
@@ -27,25 +28,11 @@ class WebSite
     char[] content;
 
     content ~= "Content-type: text/html\n\n".dup;
-    content ~= getHeader().dup;
+    //content ~= getHeader().dup;
     content ~= getMainContent();
-    content ~= getFooter().dup;
+    //content ~= getFooter().dup;
 
     result = content.idup;
-    return result;
-  }
-
-  private char[] getHeader()
-  {
-    char[] result;
-    result = std.file.readText("template/header.htemplate").dup;
-    return result;
-  }
-
-  private char[] getFooter()
-  {
-    char[] result;
-    result = std.file.readText("template/footer.htemplate").dup;
     return result;
   }
 
@@ -53,8 +40,10 @@ class WebSite
   {
     string result;
 
-    Database database = new Database();
-    result ~= database.getMainContent();
+    Config config = new Config();
+    Database database = new Database(config.dbDirectory);
+    result ~= database.getWebPage();
+    //result ~= database.getMainContent();
     //result ~= getDBDescription().dup;
     //result ~= getAllDirectories().dup;
     return result;
@@ -64,6 +53,7 @@ class WebSite
   private string getTableOfContents()
   {
     string result = "";
+    Config config = new Config();
     foreach (DirEntry e; std.file.dirEntries(config.dbDirectory, SpanMode.shallow))
     {
       if (e.isDir)
@@ -71,6 +61,7 @@ class WebSite
 	result ~= std.string.format("<a href=\"%s\">%s</a>", e.name, e.name); //getDirectory(e.name);
       }
     }
+    return result;
   }
 
   private char[] getAllDirectories()

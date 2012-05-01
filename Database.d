@@ -1,9 +1,10 @@
+import FileUtils;
 
 class Database
 {
   private string baseDirectory;
 
-  public Database(string baseDirectory)
+  this(string baseDirectory)
   {
     this.baseDirectory = baseDirectory;
   }
@@ -11,16 +12,34 @@ class Database
   public string getWebPage()
   {
     string result = "";
+    result ~= getHeaderHtml();
+    result ~= getMainContentHtml();
+    result ~= getFooterHtml();
     return result;
   }
 
   public string getMainContentHtml()
   {
     string result = "";
-    result ~= getTitleHtml();
+    string title = "";
+    result ~= getTitleHtml(title);
     result ~= getBeforeHtml();
     //result ~= getAllDirectoriesHtml();
     result ~= getAfterHtml();
+    return result;
+  }
+
+  private char[] getHeaderHtml()
+  {
+    char[] result;
+    result = std.file.readText("template/header.htemplate").dup;
+    return result;
+  }
+
+  private char[] getFooterHtml()
+  {
+    char[] result;
+    result = std.file.readText("template/footer.htemplate").dup;
     return result;
   }
 
@@ -28,7 +47,7 @@ class Database
   {
     string result = "";
     FileUtils fileUtils = new FileUtils();
-    title = fileutils.ReadFileContents(baseDirectory ~ "/title.txt");
+    title = fileUtils.ReadFileContents(baseDirectory ~ "/title.txt");
     result = title;
     return result;
   }
@@ -36,12 +55,12 @@ class Database
   private string getBeforeHtml()
   {
     FileUtils fileUtils = new FileUtils();
-    return fileutils.ReadFileContents(baseDirectory ~ "/before.txt");
+    return fileUtils.ReadFileContents(baseDirectory ~ "/before.txt");
   }
 
   private string getAfterHtml()
   {
     FileUtils fileUtils = new FileUtils();
-    return fileutils.ReadFileContents(baseDirectory ~ "/after.txt");
+    return fileUtils.ReadFileContents(baseDirectory ~ "/after.txt");
   }
 }

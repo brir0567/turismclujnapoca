@@ -1,9 +1,10 @@
+import FileUtils;
 
 class Directory
 {
   private string baseDirectory;
 
-  public Directory(string baseDirectory)
+  this(string baseDirectory)
   {
     this.baseDirectory = baseDirectory;
   }
@@ -17,7 +18,8 @@ class Directory
   public string getMainContentHtml()
   {
     string result = "";
-    result ~= getTitleHtml();
+    string title = "";
+    result ~= getTitleHtml(title);
     result ~= getBeforeHtml();
     //result ~= getAllDirectoriesHtml();
     result ~= getAfterHtml();
@@ -28,7 +30,7 @@ class Directory
   {
     string result = "";
     FileUtils fileUtils = new FileUtils();
-    title = fileutils.ReadFileContents(baseDirectory ~ "/title.txt");
+    title = fileUtils.ReadFileContents(baseDirectory ~ "/title.txt");
     result = title;
     return result;
   }
@@ -36,12 +38,12 @@ class Directory
   private string getBeforeHtml()
   {
     FileUtils fileUtils = new FileUtils();
-    return fileutils.ReadFileContents(baseDirectory ~ "/before.txt");
+    return fileUtils.ReadFileContents(baseDirectory ~ "/before.txt");
   }
 
   private string getAfterHtml()
   {
     FileUtils fileUtils = new FileUtils();
-    return fileutils.ReadFileContents(baseDirectory ~ "/after.txt");
+    return fileUtils.ReadFileContents(baseDirectory ~ "/after.txt");
   }
 }

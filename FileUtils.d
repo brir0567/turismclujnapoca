@@ -1,4 +1,6 @@
-clas FileUtils
+import std.file;
+
+class FileUtils
 {
   public string ReadFileContents(string filename)
   {
