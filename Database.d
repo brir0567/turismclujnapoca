@@ -19,6 +19,7 @@ class Database
     result ~= getHeaderHtml();
     result ~= getMainContentHtml();
     result ~= getFooterHtml();
+    std.file.write("index.html", result);
     return result;
   }
 
@@ -94,6 +95,7 @@ class Database
     {
       Directory directory = new Directory(directoryFilename);
       result ~= directory.getMainContentHtml();
+      directory.getWebPage();
     }
     result ~= getCollectionOfLinksForBottomHtml(directoriesList);
     return result;
