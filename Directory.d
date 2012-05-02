@@ -3,6 +3,7 @@ import Thumbnailer;
 import std.file;
 import UrlEncode;
 import std.algorithm;
+import HtmlTemplate;
 
 class Directory
 {
@@ -16,6 +17,11 @@ class Directory
   public string getWebPage()
   {
     string result = "";
+    HtmlTemplate htmlTemplate = new HtmlTemplate();
+    result ~= htmlTemplate.getHeaderHtml();
+    result ~= getMainContentHtml();
+    result ~= htmlTemplate.getFooterHtml();
+    std.file.write(getNameOfDestinationFile(), result);
     return result;
   }
 
@@ -35,6 +41,16 @@ class Directory
     string result = "";
     FileUtils fileUtils = new FileUtils();
     result = std.string.strip(fileUtils.ReadFileContent(baseDirectory ~ "/title.txt"));
+    return result;
+  }
+
+  private string getNameOfDestinationFile()
+  {
+    string result = "";
+    string title = getTitle();
+    UrlEncode urlEncode = new UrlEncode();
+    string titleUrlencoded = urlEncode.encode(title);
+    result = std.string.format("%s.html", titleUrlencoded);
     return result;
   }
 

@@ -3,6 +3,7 @@ import Config;
 import std.file;
 import Directory;
 import UrlEncode;
+import HtmlTemplate;
 
 class Database
 {
@@ -16,9 +17,10 @@ class Database
   public string getWebPage()
   {
     string result = "";
-    result ~= getHeaderHtml();
+    HtmlTemplate htmlTemplate = new HtmlTemplate();
+    result ~= htmlTemplate.getHeaderHtml();
     result ~= getMainContentHtml();
-    result ~= getFooterHtml();
+    result ~= htmlTemplate.getFooterHtml();
     std.file.write("index.html", result);
     return result;
   }
@@ -98,20 +100,6 @@ class Database
       directory.getWebPage();
     }
     result ~= getCollectionOfLinksForBottomHtml(directoriesList);
-    return result;
-  }
-
-  private char[] getHeaderHtml()
-  {
-    char[] result;
-    result = std.file.readText("template/header.htemplate").dup;
-    return result;
-  }
-
-  private char[] getFooterHtml()
-  {
-    char[] result;
-    result = std.file.readText("template/footer.htemplate").dup;
     return result;
   }
 
