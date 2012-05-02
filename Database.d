@@ -44,7 +44,34 @@ class Database
       string title = directory.getTitle();
       UrlEncode urlEncode = new UrlEncode();
       string titleUrlencoded = urlEncode.encode(title);
-      result ~= std.string.format("<a href=\"#%s\">%s</a><br/>", titleUrlencoded, title);
+      result ~= std.string.format("<a href=\"#%s\">%s</a><a class=\"new-page\" href=\"%s.html\"></a><br/>", 
+				  titleUrlencoded, title, titleUrlencoded);
+    }
+    result ~= `</div>`;
+    return result;
+  }
+
+  private string getCollectionOfLinksForBottomHtml(string[] directoriesList)
+  {
+    string result = "";
+    result ~= `<div id="bottom-links">`;
+    Config config = new Config();
+    bool isFirstLink = true;
+    foreach (directoryFilename; directoriesList)
+    {
+      Directory directory = new Directory(directoryFilename);
+      string title = directory.getTitle();
+      UrlEncode urlEncode = new UrlEncode();
+      string titleUrlencoded = urlEncode.encode(title);
+      if (isFirstLink)
+      {
+	isFirstLink = false;
+      }
+      else
+      {
+	result ~= "|";
+      }
+      result ~= std.string.format(" <a href=\"%s.html\">%s</a> ", titleUrlencoded, title);
     }
     result ~= `</div>`;
     return result;
@@ -68,6 +95,7 @@ class Database
       Directory directory = new Directory(directoryFilename);
       result ~= directory.getMainContentHtml();
     }
+    result ~= getCollectionOfLinksForBottomHtml(directoriesList);
     return result;
   }
 
@@ -90,6 +118,7 @@ class Database
     string result = "";
     FileUtils fileUtils = new FileUtils();
     title = fileUtils.ReadFileContents(baseDirectory ~ "/title.txt");
+    title = std.string.strip(title);
     result = std.string.format("<h1>%s</h1>", title);
     return result;
   }

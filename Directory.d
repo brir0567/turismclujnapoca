@@ -34,7 +34,7 @@ class Directory
   {
     string result = "";
     FileUtils fileUtils = new FileUtils();
-    result = fileUtils.ReadFileContents(baseDirectory ~ "/title.txt");
+    result = std.string.strip(fileUtils.ReadFileContents(baseDirectory ~ "/title.txt"));
     return result;
   }
 
