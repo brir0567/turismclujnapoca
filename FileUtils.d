@@ -2,7 +2,7 @@ import std.file;
 
 class FileUtils
 {
-  public string ReadFileContents(string filename)
+  public string ReadFileContent(string filename)
   {
     string result = "";
     if (std.file.exists(filename))
@@ -11,4 +11,14 @@ class FileUtils
     }
     return result;
   }
+
+  public void WriteContentToFile(string filename, string content)
+  {
+    if (std.file.exists(filename))
+    {
+      std.file.remove(filename);
+    }
+    std.file.write(filename, content);
+  }
+
 }

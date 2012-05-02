@@ -34,7 +34,7 @@ class Directory
   {
     string result = "";
     FileUtils fileUtils = new FileUtils();
-    result = std.string.strip(fileUtils.ReadFileContents(baseDirectory ~ "/title.txt"));
+    result = std.string.strip(fileUtils.ReadFileContent(baseDirectory ~ "/title.txt"));
     return result;
   }
 
@@ -51,13 +51,13 @@ class Directory
   private string getBeforeHtml()
   {
     FileUtils fileUtils = new FileUtils();
-    return fileUtils.ReadFileContents(baseDirectory ~ "/before.txt");
+    return fileUtils.ReadFileContent(baseDirectory ~ "/before.txt");
   }
 
   private string getAfterHtml()
   {
     FileUtils fileUtils = new FileUtils();
-    return fileUtils.ReadFileContents(baseDirectory ~ "/after.txt");
+    return fileUtils.ReadFileContent(baseDirectory ~ "/after.txt");
   }
 
   private string getDirectory_ImagesHtml()

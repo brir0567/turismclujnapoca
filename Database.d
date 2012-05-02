@@ -117,7 +117,7 @@ class Database
   {
     string result = "";
     FileUtils fileUtils = new FileUtils();
-    title = fileUtils.ReadFileContents(baseDirectory ~ "/title.txt");
+    title = fileUtils.ReadFileContent(baseDirectory ~ "/title.txt");
     title = std.string.strip(title);
     result = std.string.format("<h1>%s</h1>", title);
     return result;
@@ -126,12 +126,12 @@ class Database
   private string getBeforeHtml()
   {
     FileUtils fileUtils = new FileUtils();
-    return fileUtils.ReadFileContents(baseDirectory ~ "/before.txt");
+    return fileUtils.ReadFileContent(baseDirectory ~ "/before.txt");
   }
 
   private string getAfterHtml()
   {
     FileUtils fileUtils = new FileUtils();
-    return fileUtils.ReadFileContents(baseDirectory ~ "/after.txt");
+    return fileUtils.ReadFileContent(baseDirectory ~ "/after.txt");
   }
 }
