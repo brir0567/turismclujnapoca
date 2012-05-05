@@ -74,7 +74,8 @@ class Database
       {
 	result ~= "|";
       }
-      result ~= std.string.format(" <a href=\"%s.html\">%s</a> ", titleUrlencoded, title);
+      result ~= std.string.format(" <a title=\"%s\" href=\"%s.html\">%s</a> ", 
+				  title, titleUrlencoded, title);
     }
     result ~= `</div>`;
     return result;

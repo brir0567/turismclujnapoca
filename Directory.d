@@ -80,8 +80,6 @@ class Directory
   {
     string result;
     string[] imagesList;
-    //result ~= typeid(typeof(imagesList)).toString();
-    //std.algorithm.sort!("a.name < b.name")(imagesList);
     foreach (imageFile; std.file.dirEntries(baseDirectory, "*.{JPG,jpg}", SpanMode.shallow))
     {
       imagesList ~= imageFile.name;
@@ -91,12 +89,15 @@ class Directory
       result ~= getImageHtml(imageFilename);
     }
     return result;
-  }  
+  }
 
   private char[] getImageHtml(string imageFilename)
   {
     char[] result;
-    string thumbFilename = imageFilename ~ "_thm.png";
+    string imageTitle;
+    string imageDescription;
+    getImageTitleAndDescription(imageFilename, imageTitle, imageDescription);
+string thumbFilename = imageFilename ~ "_thm.png";
     if (!std.file.exists(thumbFilename))
     {
       Thumbnailer thumbnailer = new Thumbnailer();
@@ -108,11 +109,18 @@ class Directory
 `,
 				  imageFilename, thumbFilename);
       string textFilename = imageFilename ~ ".txt";
-      if (std.file.exists(textFilename))
+      if (imageDescription.length)
       {
-	result ~= `<p class="img_text">` ~ std.file.readText(textFilename).dup ~ `</p>`;
+	result ~= `<p class="img_text">` ~ imageDescription ~ `</p>`;
       }
     }
     return result;
   }
+
+  private void getImageTitleAndDescription(string imageFilename, ref string imageTitle, ref string imageDescription)
+  {
+    FileUtils fileUtils = new FileUtils();
+    imageDescription = std.string.strip(fileUtils.ReadFileContent(imageFilename ~ ".txt"));
+  }
+
 }
