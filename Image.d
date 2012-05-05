@@ -26,10 +26,9 @@ string thumbFilename = imageFilename ~ "_thm.png";
     }
     if (std.file.exists(thumbFilename))
     {
-      result ~= std.string.format(`<p><a href="%s" target="_blank"><img class="dbimage" src="%s" /></a></p>
+      result ~= std.string.format(`<p><a href="%s" target="_blank"><img class="dbimage" alt="%s" title="%s" src="%s" /></a></p>
 `,
-				  imageFilename, thumbFilename);
-      string textFilename = imageFilename ~ ".txt";
+				  imageFilename, imageTitle, imageTitle, thumbFilename);
       if (imageDescription.length)
       {
 	result ~= `<p class="img_text">` ~ imageDescription ~ `</p>`;
