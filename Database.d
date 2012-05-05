@@ -78,6 +78,8 @@ class Database
       result ~= std.string.format(" <a title=\"%s\" href=\"%s.html\">%s</a>\n ", 
 				  title, titleUrlencoded, title);
     }
+    result ~= std.string.format(" <br/>\n<a title=\"%s\" href=\"%s.html\">%s</a>\n ", 
+				"Sitemap", "sitemap", "Sitemap");
     result ~= `</div>`;
     return result;
   }
