@@ -49,53 +49,43 @@ string thumbFilename = imageFilename ~ "_thm.png";
 
   private string getHtmlAttributeSafeBeginningOfString(string text)
   {
-    string result = imageDescription;
-    auto position = imageDescription.indexOf("<");
+    string result = text;
+    auto position = result.indexOf("<");
     if (position > -1)
     {
-      result = imageDescription[0..position];
+      result = result[0..position];
+    }
+    position = result.indexOf("\"");
+    if (position > -1)
+    {
+      result = result[0..position];
     }
     return result;
   }
 
   private string getImageTitleFromImageDescription(string imageDescription)
   {
-    string result = imageDescription;
-    auto position = imageDescription.indexOf("<");
+    string result = getHtmlAttributeSafeBeginningOfString(imageDescription);
+    auto position = result.indexOf(".");
     if (position > -1)
     {
-      result = imageDescription[0..position];
-    }
-    else
+      result = result[0..position];
+    } 
+    position = result.indexOf("\r\n\r\n");
+    if (position > -1)
     {
-      position = imageDescription.indexOf(".");
+      result = result[0..position];
+    } 
+    else 
+    {
+      position = result.indexOf("\n\n");
       if (position > -1)
       {
-	result = imageDescription[0..position];
+	result = result[0..position];
       } 
-      else 
-      {
-	position = imageDescription.indexOf("\r\n\r\n");
-	if (position > -1)
-	{
-	  result = imageDescription[0..position];
-	} 
-	else 
-	{
-	  position = imageDescription.indexOf("\n\n");
-	  if (position > -1)
-	  {
-	    result = imageDescription[0..position];
-		} 
-	      else 
-		{
-	   
-		}
-	    }
-	}
     }
     Log.info(result);
     return result;
-}
+  }
 
 }
