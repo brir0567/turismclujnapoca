@@ -4,6 +4,8 @@ import std.file;
 import Directory;
 import WebStrings;
 import HtmlTemplate;
+import SearchEngine;
+import SiteMap;
 
 class Database
 {
@@ -104,7 +106,7 @@ class Database
     SearchEngine searchEngine = new SearchEngine();
     searchEngine.generateFilesForCrawler(directoriesList);
     SiteMap siteMap = new SiteMap();
-    siteMap.CreateWebPage(directoriesList);
+    siteMap.createWebPage(directoriesList);
     return result;
   }
 

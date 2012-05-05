@@ -1,20 +1,17 @@
+import HtmlTemplate;
+import WebStrings;
+
 class SiteMap
 {  
-  private string baseDirectory;
-
-  this(string baseDirectory)
-  {
-    this.baseDirectory = baseDirectory;
-  }
-
   public string createWebPage (string[] directoriesList)
   {
     string result = "";
     HtmlTemplate htmlTemplate = new HtmlTemplate();
     result ~= htmlTemplate.getHeaderHtml();
-    result ~= getMainContentHtml();
+    result ~= getMainContentHtml(directoriesList);
     result ~= htmlTemplate.getFooterHtml();
     std.file.write(getNameOfDestinationFile(), result);
+    return result;
   }
 
   private string getNameOfDestinationFile()
@@ -27,9 +24,29 @@ class SiteMap
     string result = "";
     string title = "";
     result ~= getTitleHtml(title);
-    result ~= getBeforeHtml();
-    result ~= getDirectory_ImagesHtml();
-    result ~= getAfterHtml();
+    result ~= getSitemapProperHtml(directoriesList);
     return result;
   }
+
+  private string getSitemapProperHtml(string[] directoriesList)
+  {
+    string result = "";
+    return result;
+  }
+
+  private string getTitleHtml(ref string title)
+  {
+    string result = "";
+    title = getTitle();
+    WebStrings webStrings = new WebStrings();
+    string titleUrlencoded = webStrings.convertStringToUrl(title);
+    result = std.string.format("<h2 id=\"%s\">%s</h2>", titleUrlencoded, title);
+    return result;
+  }
+
+  public string getTitle()
+  {
+    return "Sitemap";
+  }
+
 }

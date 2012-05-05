@@ -34,6 +34,10 @@ string thumbFilename = imageFilename ~ "_thm.png";
       {
 	result ~= `<p class="img_text">` ~ imageDescription ~ `</p>`;
       }
+      else
+      {
+	Log.info("Missing file: " ~ imageFilename ~ ".txt");
+      }
     }
     return result;
   }
@@ -69,7 +73,6 @@ string thumbFilename = imageFilename ~ "_thm.png";
 	result = result[0..position];
       } 
     }
-    Log.info(result);
     return result;
   }
 
