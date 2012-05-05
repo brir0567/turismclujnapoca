@@ -33,15 +33,17 @@ class SiteMap
   private string getSitemapProperHtml(string[] directoriesList)
   {
     string result = "";
+    result ~= `<div id="sitemap">`;
     WebStrings webStrings = new WebStrings();
     foreach (string directoryFilename; directoriesList)
     {
       Directory directory = new Directory(directoryFilename);
       string title = directory.getTitle();
       string titleUrlencoded = webStrings.convertStringToUrl(title);
-      result ~= std.string.format(" <h2><a title=\"%s\" href=\"%s.html\">%s</a></h2>\n ", 
+      result ~= std.string.format(" <h2><a title=\"%s\" href=\"%s.html\">%s</a></h2><br/>\n ", 
 				  title, titleUrlencoded, title);
     }
+    result ~= `</div>`;
     return result;
   }
 
