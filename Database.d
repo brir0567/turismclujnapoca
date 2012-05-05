@@ -104,7 +104,7 @@ class Database
       directory.getWebPage();
     }
     result ~= getCollectionOfLinksForBottomHtml(directoriesList);
-    SearchEngine searchEngine = new SearchEngine();
+    SearchEngine searchEngine = new SearchEngine("http://www.scs.ubbcluj.ro/~brir0567/");
     searchEngine.generateFilesForCrawler(directoriesList);
     SiteMap siteMap = new SiteMap();
     siteMap.createWebPage(directoriesList);
