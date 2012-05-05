@@ -11,3 +11,5 @@ db/*
 index
 # Emacs
 TAGS
+# Generated files.
+*.html

@@ -289,8 +289,16 @@ div#toc {
     float: right;
 }
 
+div#toc h2
+{
+    font-size: 11.5pt;
+    margin-bottom: 0;
+    line-height: 0;
+}
+
 a.new-page {
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wFAgISImXR1FYAAABRSURBVBjTjY/BDUAhDEKpcaPupDN1pzoT/6AHNf2x70gggJDEjnScwqJGIg13GAVJqvRxVSl+q2l61KQ3xubmjFg61Bwk32e8zVn513PTeBo/WyIt/F9yLDsAAAAASUVORK5CYII=) center right no-repeat;
     background: url("new-page.png") center right no-repeat!ie;
     padding-right: 13px;
 }
+

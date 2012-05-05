@@ -47,8 +47,8 @@ class Database
       string title = directory.getTitle();
       UrlEncode urlEncode = new UrlEncode();
       string titleUrlencoded = urlEncode.encode(title);
-      result ~= std.string.format("<a href=\"#%s\">%s</a><a class=\"new-page\" href=\"%s.html\"></a><br/>", 
-				  titleUrlencoded, title, titleUrlencoded);
+      result ~= std.string.format("<h2><a title=\"%s\" class=\"new-page\" href=\"%s.html\">%s</a></h2><br/>", 
+				  title, titleUrlencoded, title);
     }
     result ~= `</div>`;
     return result;
