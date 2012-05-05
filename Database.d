@@ -20,7 +20,8 @@ class Database
   {
     string result = "";
     HtmlTemplate htmlTemplate = new HtmlTemplate();
-    result ~= htmlTemplate.getHeaderHtml();
+    string title = getTitle();
+    result ~= htmlTemplate.getHeaderHtml(title, title, title);
     result ~= getMainContentHtml();
     result ~= htmlTemplate.getFooterHtml();
     std.file.write("index.html", result);
@@ -114,10 +115,16 @@ class Database
   private string getTitleHtml(ref string title)
   {
     string result = "";
-    FileUtils fileUtils = new FileUtils();
-    title = fileUtils.ReadFileContent(baseDirectory ~ "/title.txt");
-    title = std.string.strip(title);
+    title = getTitle();
     result = std.string.format("<h1>%s</h1>", title);
+    return result;
+  }  
+
+  public string getTitle()
+  {
+    string result = "";
+    FileUtils fileUtils = new FileUtils();
+    result = std.string.strip(fileUtils.ReadFileContent(baseDirectory ~ "/title.txt"));
     return result;
   }
 

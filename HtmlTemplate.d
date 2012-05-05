@@ -1,18 +1,22 @@
 import std.file;
+import std.array;
 
 class HtmlTemplate
 {
-  public char[] getHeaderHtml()
+  public string getHeaderHtml(string title, string description, string keywords)
   {
-    char[] result;
-    result = std.file.readText("template/header.htemplate").dup;
+    string result;
+    result = std.file.readText("template/header.htemplate");
+    result = result.replace("<title></title>", std.string.format("<title>%s</title>", title));
+    result = result.replace(`<meta name="description" content="" />`, std.string.format(`<meta name="description" content="%s" />`, keywords));
+    result = result.replace(`<meta name="keywords" content="" />`, std.string.format(`<meta name="keywords" content="%s" />`, keywords));
     return result;
   }
 
-  public char[] getFooterHtml()
+  public string getFooterHtml()
   {
-    char[] result;
-    result = std.file.readText("template/footer.htemplate").dup;
+    string result;
+    result = std.file.readText("template/footer.htemplate");
     return result;
   }
 

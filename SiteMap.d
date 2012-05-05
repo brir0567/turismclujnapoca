@@ -9,7 +9,7 @@ class SiteMap
   {
     string result = "";
     HtmlTemplate htmlTemplate = new HtmlTemplate();
-    result ~= htmlTemplate.getHeaderHtml();
+    result ~= htmlTemplate.getHeaderHtml("Sitemap", "Sitemap", "Sitemap");
     result ~= getMainContentHtml(directoriesList);
     result ~= htmlTemplate.getFooterHtml();
     std.file.write(getNameOfDestinationFile(), result);

@@ -19,7 +19,8 @@ class Directory
   {
     string result = "";
     HtmlTemplate htmlTemplate = new HtmlTemplate();
-    result ~= htmlTemplate.getHeaderHtml();
+    string title = getTitle();
+    result ~= htmlTemplate.getHeaderHtml(title, title, title);
     result ~= getMainContentHtml();
     result ~= htmlTemplate.getFooterHtml();
     std.file.write(getNameOfDestinationFile(), result);
