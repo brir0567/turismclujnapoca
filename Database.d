@@ -60,7 +60,6 @@ class Database
   {
     string result = "";
     result ~= `<div id="bottom-links">`;
-    Config config = new Config();
     bool isFirstLink = true;
     WebStrings webStrings = new WebStrings();
     foreach (directoryFilename; directoriesList)
@@ -76,7 +75,7 @@ class Database
       {
 	result ~= "|";
       }
-      result ~= std.string.format(" <a title=\"%s\" href=\"%s.html\">%s</a> ", 
+      result ~= std.string.format(" <a title=\"%s\" href=\"%s.html\">%s</a>\n ", 
 				  title, titleUrlencoded, title);
     }
     result ~= `</div>`;
