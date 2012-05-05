@@ -101,6 +101,10 @@ class Database
       directory.getWebPage();
     }
     result ~= getCollectionOfLinksForBottomHtml(directoriesList);
+    SearchEngine searchEngine = new SearchEngine();
+    searchEngine.generateFilesForCrawler(directoriesList);
+    SiteMap siteMap = new SiteMap();
+    siteMap.CreateWebPage(directoriesList);
     return result;
   }
 
