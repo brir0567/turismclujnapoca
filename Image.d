@@ -2,6 +2,7 @@ import Thumbnailer;
 import FileUtils;
 import std.string;
 import Log;
+import WebStrings;
 
 class Image
 {
@@ -46,25 +47,10 @@ string thumbFilename = imageFilename ~ "_thm.png";
     imageTitle = getImageTitleFromImageDescription(imageDescription);
   }
 
-  private string getHtmlAttributeSafeBeginningOfString(string text)
-  {
-    string result = text;
-    auto position = result.indexOf("<");
-    if (position > -1)
-    {
-      result = result[0..position];
-    }
-    position = result.indexOf("\"");
-    if (position > -1)
-    {
-      result = result[0..position];
-    }
-    return result;
-  }
-
   private string getImageTitleFromImageDescription(string imageDescription)
   {
-    string result = getHtmlAttributeSafeBeginningOfString(imageDescription);
+    WebStrings webStrings = new WebStrings();
+    string result = webStrings.convertStringToAttributeSafeBeginningOfString(imageDescription);
     auto position = result.indexOf(".");
     if (position > -1)
     {

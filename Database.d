@@ -2,7 +2,7 @@ import FileUtils;
 import Config;
 import std.file;
 import Directory;
-import UrlEncode;
+import WebStrings;
 import HtmlTemplate;
 
 class Database
@@ -41,12 +41,12 @@ class Database
     string result = "";
     result ~= `<div id="toc">`;
     Config config = new Config();
+    WebStrings webStrings = new WebStrings();
     foreach (directoryFilename; directoriesList)
     {
       Directory directory = new Directory(directoryFilename);
       string title = directory.getTitle();
-      UrlEncode urlEncode = new UrlEncode();
-      string titleUrlencoded = urlEncode.encode(title);
+      string titleUrlencoded = webStrings.convertStringToUrl(title);
       result ~= std.string.format("<h2><a title=\"%s\" class=\"new-page\" href=\"%s.html\">%s</a></h2><br/>", 
 				  title, titleUrlencoded, title);
     }
@@ -60,12 +60,12 @@ class Database
     result ~= `<div id="bottom-links">`;
     Config config = new Config();
     bool isFirstLink = true;
+    WebStrings webStrings = new WebStrings();
     foreach (directoryFilename; directoriesList)
     {
       Directory directory = new Directory(directoryFilename);
       string title = directory.getTitle();
-      UrlEncode urlEncode = new UrlEncode();
-      string titleUrlencoded = urlEncode.encode(title);
+      string titleUrlencoded = webStrings.convertStringToUrl(title);
       if (isFirstLink)
       {
 	isFirstLink = false;
