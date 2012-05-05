@@ -40,6 +40,8 @@ class SearchEngine
     content ~= `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
     WebStrings webStrings = new WebStrings();
+    content ~= std.string.format("<url>\n<loc>%s%s.html</loc>\n<priority>0.5</priority>\n</url>\n ", 
+				   webSiteRootUrl, "index");
     foreach (string directoryFilename; directoriesList)
     {
       Directory directory = new Directory(directoryFilename);
@@ -48,6 +50,9 @@ class SearchEngine
       content ~= std.string.format("<url>\n<loc>%s%s.html</loc>\n<priority>0.5</priority>\n</url>\n ", 
 				   webSiteRootUrl, titleUrlencoded);
     }
+
+    content ~= std.string.format("<url>\n<loc>%s%s.html</loc>\n<priority>0.5</priority>\n</url>\n ", 
+				   webSiteRootUrl, "sitemap");
     content ~= `</urlset>`;
     FileUtils fileUtils = new FileUtils();
     fileUtils.WriteContentToFile("sitemap.xml", content);
