@@ -6,6 +6,7 @@ import WebStrings;
 import HtmlTemplate;
 import SearchEngine;
 import SiteMap;
+import Tags;
 
 class Database
 {
@@ -97,9 +98,9 @@ class Database
       }
     }
     directoriesList.sort;
-    Tags tags = new Tags();
+    Tags tags = new Tags(baseDirectory);
     tags.createWebPages();
-    string[] tagsList = tags.getTagsList();
+    //string[] tagsList = tags.getTagsList();
     result ~= tags.getTagsListHtml();
     result ~= getTableOfContentsHtml(directoriesList);
     foreach (directoryFilename; directoriesList)
