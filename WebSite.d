@@ -42,8 +42,6 @@ class WebSite
     return result;
   }
 
-
-
   //private char[] getDirectory(string directory)
   //{
   //  result ~= std.string.format("<a name=\"%s\">", directory);
