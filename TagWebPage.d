@@ -49,27 +49,59 @@ class TagWebPage
   private string getDirectoriesAndImagesHtml()
   {
     string result = "";
-    //result ~= getTableOfContentsHtml(tagConfiguration.directories);
+    result ~= getTableOfContentsHtml(tagConfiguration.directories);
     foreach (directoryFilename; tagConfiguration.directories)
     {
       Directory directory = new Directory(baseDirectory ~ "/" ~ directoryFilename);
       result ~= directory.getMainContentHtml();
       directory.getWebPage();
     }
-    //result ~= getCollectionOfLinksForBottomHtml(directoriesList);
-    // result ~= `<div id="sitemap">`;
-    // WebStrings webStrings = new WebStrings();    
-    // result ~= std.string.format(" <h2><a title=\"%s\" href=\"%s.html\">%s</a></h2><br/>\n ", 
-    // 				  "Homepage", "index", "Homepage");
-    // foreach (string directoryFilename; directoriesList)
-    // {
-    //   Directory directory = new Directory(directoryFilename);
-    //   string title = directory.getTitle();
-    //   string titleUrlencoded = webStrings.convertStringToUrl(title);
-    //   result ~= std.string.format(" <h2><a title=\"%s\" href=\"%s.html\">%s</a></h2><br/>\n ", 
-    // 				  title, titleUrlencoded, title);
-    // }
-    // result ~= `</div>`;
+    result ~= getCollectionOfLinksForBottomHtml(tagConfiguration.directories);
+    return result;
+  }  
+
+  private string getTableOfContentsHtml(string[] directoriesList)
+  {
+    string result = "";
+    result ~= `<div id="toc">`;
+    WebStrings webStrings = new WebStrings();
+    foreach (directoryFilename; directoriesList)
+    {
+      Directory directory = new Directory(baseDirectory ~ "/" ~ directoryFilename);
+      string title = directory.getTitle();
+      string titleUrlencoded = webStrings.convertStringToUrl(title);
+      result ~= std.string.format("<h2><a title=\"%s\" class=\"new-page\" href=\"%s.html\">%s</a></h2><br/>", 
+				  title, titleUrlencoded, title);
+    }
+    result ~= `</div>`;
+    return result;
+  }
+
+  private string getCollectionOfLinksForBottomHtml(string[] directoriesList)
+  {
+    string result = "";
+    result ~= `<div id="bottom-links">`;
+    bool isFirstLink = true;
+    WebStrings webStrings = new WebStrings();
+    foreach (directoryFilename; directoriesList)
+    {
+      Directory directory = new Directory(baseDirectory ~ "/" ~ directoryFilename);
+      string title = directory.getTitle();
+      string titleUrlencoded = webStrings.convertStringToUrl(title);
+      if (isFirstLink)
+      {
+	isFirstLink = false;
+      }
+      else
+      {
+	result ~= "|";
+      }
+      result ~= std.string.format(" <a title=\"%s\" href=\"%s.html\">%s</a>\n ", 
+				  title, titleUrlencoded, title);
+    }
+    result ~= std.string.format(" <br/>\n<a title=\"%s\" href=\"%s.html\">%s</a>\n ", 
+				"Sitemap", "sitemap", "Sitemap");
+    result ~= `</div>`;
     return result;
   }
 

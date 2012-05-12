@@ -100,7 +100,6 @@ class Database
     directoriesList.sort;
     Tags tags = new Tags(baseDirectory);
     tags.createWebPages();
-    //string[] tagsList = tags.getTagsList();
     result ~= tags.getTagsListHtml();
     result ~= getTableOfContentsHtml(directoriesList);
     foreach (directoryFilename; directoriesList)
