@@ -21,6 +21,7 @@ class HtmlTemplate
   {
     string result;
     result = std.file.readText("template/footer.htemplate");
+    result = result.replace(`<!-- Footer tags. -->`, getTagsTemplateHtmlContent());
     return result;
   }
 
@@ -58,6 +59,11 @@ class HtmlTemplate
       }
     }
     return result;
+  }
+
+  private string getTagsTemplateHtmlContent()
+  {
+    return std.file.readText("tags.htemplate");
   }
 
 }
