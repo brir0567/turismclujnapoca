@@ -2,6 +2,7 @@ import HtmlTemplate;
 import WebStrings;
 import Directory;
 import Log;
+import std.stdio;
 
 class SiteMap
 {  
@@ -37,6 +38,7 @@ class SiteMap
     WebStrings webStrings = new WebStrings();    
     result ~= std.string.format(" <h2><a title=\"%s\" href=\"%s.html\">%s</a></h2><br/>\n ", 
 				  "Homepage", "index", "Homepage");
+    result ~= getTagsHtml();
     foreach (string directoryFilename; directoriesList)
     {
       Directory directory = new Directory(directoryFilename);
@@ -46,6 +48,35 @@ class SiteMap
 				  title, titleUrlencoded, title);
     }
     result ~= `</div>`;
+    return result;
+  }
+
+  private string getTagsHtml()
+  {
+    string result = "";
+    const string TAGS_HTEMPLATE = "tags.htemplate";
+    if (std.file.exists(TAGS_HTEMPLATE))
+    {
+      auto file = File(TAGS_HTEMPLATE);
+      char[] buf;
+      while (file.readln(buf))
+      {
+	string line = buf.idup;
+	std.string.strip(line);
+	if (line != "")
+	{
+	  if (result == "")
+	  {
+	    result ~= "<br/>\n";
+	  }
+	  result ~= ` <h2>` ~ line ~ "</h2><br/>\n";
+	}
+      }
+      if (result <> "")
+      {
+	result ~= "<br/>\n";
+      }
+    }
     return result;
   }
 
