@@ -59,6 +59,7 @@ class Tags
       result ~= std.string.format(" <a title=\"%s\" href=\"%s.html\">%s</a>\n ", 
 				  tag.title, webStrings.convertStringToUrl( tag.title), tag.title);
     }
+    std.file.write("tags.htemplate", result);
     return result;
   }
 
