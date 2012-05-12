@@ -1,4 +1,4 @@
-struct Tag
+struct TagConfiguration
 {
   string title;
   string description;
