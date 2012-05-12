@@ -1,16 +1,19 @@
 import FileUtils;
 import WebStrings;
 import Directory;
+import TagConfiguration;
 
 class SearchEngine
 {    
   /// E.g. "http://www.scs.ubbcluj.ro/~brir0567/".
   /// Notice the trailing "/".
   private string webSiteRootUrl;
+  private TagConfiguration[] tagConfigurations;
 
-  this(string webSiteRootUrl)
+  this(string webSiteRootUrl, TagConfiguration[] tagConfigurations)
   {
     this.webSiteRootUrl = webSiteRootUrl;
+    this.tagConfigurations = tagConfigurations;
   }
 
   public void generateFilesForCrawler(string[] directoriesList)
@@ -42,6 +45,7 @@ class SearchEngine
     WebStrings webStrings = new WebStrings();
     content ~= std.string.format("<url>\n<loc>%s%s.html</loc>\n<priority>0.5</priority>\n</url>\n ", 
 				   webSiteRootUrl, "index");
+    content ~= getTagsXml();
     foreach (string directoryFilename; directoriesList)
     {
       Directory directory = new Directory(directoryFilename);
@@ -63,6 +67,20 @@ class SearchEngine
     string content = std.string.format("Sitemap: %ssitemap.xml", webSiteRootUrl);
     FileUtils fileUtils = new FileUtils();
     fileUtils.WriteContentToFile("robots.txt", content);
+  }
+
+  private string getTagsXml()
+  {
+    string result = "";
+    foreach (TagConfiguration tagConfiguration; tagConfigurations)
+    {
+      WebStrings webStrings = new WebStrings;
+      string title = tagConfiguration.title;
+      string titleUrlencoded = webStrings.convertStringToUrl(title);
+      result ~= std.string.format("<url>\n<loc>%s%s.html</loc>\n<priority>0.5</priority>\n</url>\n ", 
+				   webSiteRootUrl, titleUrlencoded);
+    }
+    return result;
   }
 
 }
