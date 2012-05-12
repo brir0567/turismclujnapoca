@@ -26,7 +26,8 @@ class HtmlTemplate
   private string getMainMenu(string title)
   {
     string result;
-    const string TAGS_HTEMPLATE = "tags.htemplate";
+    const string TAGS_HTEMPLATE = "tags.htemplate"; //current_page_item
+    result ~= `<li class="first"><a href="index.html">Homepage</a></li>` ~ "\n";
     if (std.file.exists(TAGS_HTEMPLATE))
     {
       auto file = File(TAGS_HTEMPLATE);
@@ -35,8 +36,10 @@ class HtmlTemplate
       {
 	string line = buf.idup;
 	std.string.strip(line);
-	result ~= `<li>` ~ line ~ `</li>`;
-	//Log.info(buf);
+	if (line != "")
+	{
+	  result ~= "<li>" ~ line ~ "</li>\n";
+	}
       }
     }
     return result;
