@@ -4,5 +4,5 @@ import WebSite;
 void main()
 {
   WebSite webSite = new WebSite();
-  webSite.Main();
+  webSite.main();
 }

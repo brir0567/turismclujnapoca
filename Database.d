@@ -22,7 +22,7 @@ class Database
     string result = "";
     HtmlTemplate htmlTemplate = new HtmlTemplate();
     string title = getTitle();
-    result ~= htmlTemplate.getHeaderHtml(title, title, title);
+    result ~= htmlTemplate.getHeaderHtml(title, title, title, true);
     result ~= getMainContentHtml();
     result ~= htmlTemplate.getFooterHtml();
     std.file.write("index.html", result);
