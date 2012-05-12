@@ -1,6 +1,7 @@
 import HtmlTemplate;
 import TagConfiguration;
 import WebStrings;
+import Directory;
 
 class TagWebPage
 {
@@ -39,13 +40,23 @@ class TagWebPage
     string result = "";
     string title = "";
     result ~= getTitleHtml(title);
-    result ~= getSitemapProperHtml();
+    result ~= getBeforeHtml();
+    result ~= getDirectoriesAndImagesHtml();
+    result ~= getAfterHtml();
     return result;
   }
 
-  private string getSitemapProperHtml()
+  private string getDirectoriesAndImagesHtml()
   {
     string result = "";
+    //result ~= getTableOfContentsHtml(tagConfiguration.directories);
+    foreach (directoryFilename; tagConfiguration.directories)
+    {
+      Directory directory = new Directory(baseDirectory ~ "/" ~ directoryFilename);
+      result ~= directory.getMainContentHtml();
+      directory.getWebPage();
+    }
+    //result ~= getCollectionOfLinksForBottomHtml(directoriesList);
     // result ~= `<div id="sitemap">`;
     // WebStrings webStrings = new WebStrings();    
     // result ~= std.string.format(" <h2><a title=\"%s\" href=\"%s.html\">%s</a></h2><br/>\n ", 
@@ -75,6 +86,16 @@ class TagWebPage
   public string getTitle()
   {
     return tagConfiguration.title;
+  }
+ 
+  private string getBeforeHtml()
+  {
+    return tagConfiguration.before;
+  }
+
+  private string getAfterHtml()
+  {
+    return tagConfiguration.after;
   }
 
 }

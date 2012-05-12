@@ -144,4 +144,5 @@ class Database
     FileUtils fileUtils = new FileUtils();
     return fileUtils.ReadFileContent(baseDirectory ~ "/after.txt");
   }
+
 }
