@@ -2,6 +2,7 @@ import std.file;
 import std.array;
 import Log;
 import std.stdio;
+import std.string;
 
 class HtmlTemplate
 {
@@ -26,7 +27,7 @@ class HtmlTemplate
   private string getMainMenu(string title)
   {
     string result;
-    const string TAGS_HTEMPLATE = "tags.htemplate"; //current_page_item
+    const string TAGS_HTEMPLATE = "tags.htemplate"; //
     result ~= `<li class="first"><a href="index.html">Homepage</a></li>` ~ "\n";
     if (std.file.exists(TAGS_HTEMPLATE))
     {
@@ -38,7 +39,14 @@ class HtmlTemplate
 	std.string.strip(line);
 	if (line != "")
 	{
-	  result ~= "<li>" ~ line ~ "</li>\n";
+	  if (line.indexOf(title) >= 0)
+	    {
+	      result ~= `<li class="current_page_item">` ~ line ~ "</li>\n";
+	    }
+	  else
+	    {
+	      result ~= "<li>" ~ line ~ "</li>\n";
+	    }
 	}
       }
     }
