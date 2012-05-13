@@ -98,7 +98,13 @@ ul h4 {
 }
 
 #content h1 {
-	margin-bottom: 1em;
+	margin-top: 0.35em;
+	margin-bottom: 0.75em;
+}
+
+#content h2 {
+	margin-top: 0.35em;
+	margin-bottom: 0.35em;
 }
 
 #content h2, #content h3, #content h4 {
