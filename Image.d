@@ -27,10 +27,30 @@ class Image
     }
     if (std.file.exists(thumbFilename))
     {
-      WebStrings webStrings = new WebStrings();
-      string shortImageFilename = webStrings.convertStringToFilename(imageTitle);
-      //string imageFilename = shortImageFilename ~
-      Log.info("'%s' '%s'", imageFilename, shortImageFilename);
+      const bool RENAME_IMAGES = false;
+      if (RENAME_IMAGES)
+      {
+	if (std.string.indexOf(imageFilename, "IMG_") >= 0)
+	  {	
+	    string oldImageText = imageFilename ~ ".txt";
+	    string directoryFilename = "";
+	    int position = std.string.lastIndexOf(imageFilename, "/");
+	    if (position >= 0)
+	      {
+		directoryFilename = imageFilename[0..position];
+	      }
+	    WebStrings webStrings = new WebStrings();
+	    string shortImageFilename = webStrings.convertStringToFilename(imageTitle);
+	    string newImageFilename = std.string.format("%s/%s.jpg", directoryFilename, shortImageFilename);
+	    string newImageThumbnail = newImageFilename ~ "_thm.png";
+	    string newImageText = newImageFilename ~ ".txt";
+	    Log.info("'%s' '%s' '%s' -> '%s' '%s' '%s'", imageFilename, thumbFilename, oldImageText,
+		     newImageFilename, newImageThumbnail, newImageText);
+	    std.file.copy(imageFilename, newImageFilename); 
+	    std.file.copy(thumbFilename, newImageThumbnail); 
+	    std.file.copy(oldImageText, newImageText);
+	  }
+      }
       result ~= std.string.format(`<p><a href="%s" target="_blank"><img class="dbimage" alt="%s" title="%s" src="%s" /></a></p>
 `,
 				  imageFilename, imageTitle, imageTitle, thumbFilename);

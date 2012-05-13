@@ -3,6 +3,7 @@ import TagConfiguration;
 import std.file;
 import WebStrings;
 import TagWebPage;
+import Log;
 
 class Tags
 { 
@@ -39,10 +40,6 @@ class Tags
       xml.onEndTag["Before"] = (in Element e) { tag.before = e.text(); }; 
       xml.onEndTag["After"] = (in Element e) { tag.after = e.text(); }; 
       xml.onEndTag["Directory"] = (in Element e) { tag.directories ~= e.text(); }; 
-      //xml.onEndTag["Directories"] = (ElementParser xml) 
-      //{
-	//xml.onEndTag["Directory"] = (in Element e) { tag.directories ~= e.text(); }; 
-	//};
       xml.parse(); 
       result ~= tag; 
     }; 
