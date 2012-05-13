@@ -111,7 +111,7 @@ class TagWebPage
     title = getTitle();
     WebStrings webStrings = new WebStrings();
     string titleUrlencoded = webStrings.convertStringToUrl(title);
-    result = std.string.format("<h2 id=\"%s\">%s</h2>", titleUrlencoded, title);
+    result = std.string.format("<h1 id=\"%s\">%s</h1>", titleUrlencoded, title);
     return result;
   }
 

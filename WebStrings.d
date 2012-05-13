@@ -25,6 +25,17 @@ class WebStrings
     return result;
   }
 
+  public string convertStringToFilename(string input, int maximumLength = 120)
+  {
+    string result = "";
+    result = convertStringToUrl(input);
+    if (result.length > maximumLength)
+    {
+      result = result[0..maximumLength];
+    }
+    return result;
+  }
+
   public string convertStringToAttributeSafeBeginningOfString(string text)
   {
     string result = text;

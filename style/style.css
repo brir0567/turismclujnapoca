@@ -97,6 +97,10 @@ ul h4 {
 	color: #4D4D4D;
 }
 
+#content h1 {
+	margin-bottom: 1em;
+}
+
 #content h2, #content h3, #content h4 {
 	color: #0F0F0F;
 }

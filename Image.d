@@ -19,7 +19,7 @@ class Image
     string imageTitle;
     string imageDescription;
     getImageTitleAndDescription(imageFilename, imageTitle, imageDescription);
-string thumbFilename = imageFilename ~ "_thm.png";
+    string thumbFilename = imageFilename ~ "_thm.png";
     if (!std.file.exists(thumbFilename))
     {
       Thumbnailer thumbnailer = new Thumbnailer();
@@ -27,6 +27,10 @@ string thumbFilename = imageFilename ~ "_thm.png";
     }
     if (std.file.exists(thumbFilename))
     {
+      WebStrings webStrings = new WebStrings();
+      string shortImageFilename = webStrings.convertStringToFilename(imageTitle);
+      //string imageFilename = shortImageFilename ~
+      Log.info("'%s' '%s'", imageFilename, shortImageFilename);
       result ~= std.string.format(`<p><a href="%s" target="_blank"><img class="dbimage" alt="%s" title="%s" src="%s" /></a></p>
 `,
 				  imageFilename, imageTitle, imageTitle, thumbFilename);
