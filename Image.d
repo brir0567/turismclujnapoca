@@ -27,18 +27,24 @@ class Image
     }
     if (std.file.exists(thumbFilename))
     {
-      const bool RENAME_IMAGES = false;
-      if (RENAME_IMAGES)
+      if (!imageDescription.length)
       {
-	if (std.string.indexOf(imageFilename, "IMG_") >= 0)
+	Log.info("Missing file: " ~ imageFilename ~ ".txt");
+      }
+      else
+      {
+        const bool RENAME_IMAGES = true;
+        if (RENAME_IMAGES) 
+        {
+	  if (std.string.indexOf(imageFilename, "IMG_") >= 0)
 	  {	
 	    string oldImageText = imageFilename ~ ".txt";
 	    string directoryFilename = "";
 	    int position = std.string.lastIndexOf(imageFilename, "/");
 	    if (position >= 0)
-	      {
+	    {
 		directoryFilename = imageFilename[0..position];
-	      }
+	    }
 	    WebStrings webStrings = new WebStrings();
 	    string shortImageFilename = webStrings.convertStringToFilename(imageTitle);
 	    string newImageFilename = std.string.format("%s/%s.jpg", directoryFilename, shortImageFilename);
@@ -50,18 +56,16 @@ class Image
 	    std.file.copy(thumbFilename, newImageThumbnail); 
 	    std.file.copy(oldImageText, newImageText);
 	  }
-      }
-      result ~= std.string.format(`<p><a href="%s" target="_blank"><img class="dbimage" alt="%s" title="%s" src="%s" /></a></p>
+        }
+        result ~= std.string.format(`<p><a href="%s" target="_blank"><img class="dbimage" alt="%s" title="%s" src="%s" /></a></p>
 `,
 				  imageFilename, imageTitle, imageTitle, thumbFilename);
-      if (imageDescription.length)
-      {
-	result ~= `<p class="img_text">` ~ imageDescription ~ `</p>`;
+        if (imageDescription.length)
+        {
+	  result ~= `<p class="img_text">` ~ imageDescription ~ `</p>`;
+        }
       }
-      else
-      {
-	Log.info("Missing file: " ~ imageFilename ~ ".txt");
-      }
+
     }
     return result;
   }
