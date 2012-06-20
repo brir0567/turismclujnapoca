@@ -5,6 +5,7 @@ import WebStrings;
 import std.algorithm;
 import HtmlTemplate;
 import Image;
+import CharacterRecognition;
 
 class Directory
 {
@@ -86,8 +87,11 @@ class Directory
     {
       imagesList ~= imageFile.name;
     }
+
+    CharacterRecognition characterRecognition = new CharacterRecognition();
     foreach (imageFilename; imagesList.sort)
     {
+      characterRecognition.recognize(imageFilename);
       Image image = new Image(imageFilename);
       result ~= image.getHtml();
     }
