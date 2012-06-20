@@ -53,7 +53,6 @@ class CharacterRecognition
     string imageDescriptionFilename = std.string.format("%s.txt", imageFilename);
     if (!std.file.exists(imageDescriptionFilename))
     {
-      Log.info("wee %s.", imageFilename);
       string ocrFilename = std.string.format("%s.txt", getFilenameForOcr(imageFilename));
       if (!std.file.exists(ocrFilename))
       {
