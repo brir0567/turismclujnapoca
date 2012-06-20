@@ -25,7 +25,7 @@ void info(...)
 {
   contentOfLog ~= ("info, " ~ bug2479format1(_arguments, _argptr) ~ "<br/>");
 }
-void error(string value)
+void error(...)
 {
-  contentOfLog ~= ("info, " ~ value ~ "<br/>");
+  contentOfLog ~= ("error, " ~ bug2479format1(_arguments, _argptr) ~ "<br/>");
 }
