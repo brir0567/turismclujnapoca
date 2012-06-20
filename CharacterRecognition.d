@@ -31,6 +31,7 @@ class CharacterRecognition
     if (1 == existsTesseractOcr)
     {
       recognizeUsingTessearctOcr(imageFilename);
+      Log.info("Tesseract binary was found.");
     }
     else
     {
