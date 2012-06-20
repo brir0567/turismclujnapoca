@@ -3,24 +3,13 @@ import std.process;
 import std.file;
 import std.array;
 
-class CharacterRecognition
-{
-  private bool existsTesseractOcr = false;
-  
-  this()
+  static if (getExistsTesseractOcr())
   {
-    static if (getExistsTesseractOcr())
-    {
-      existsTesseractOcr = true;
-    }
+    enum int existsTesseractOcr = 1;
   }
-
-  public void recognize(string imageFilename)
+  else
   {
-    if (existsTesseractOcr)
-    {
-      recognizeUsingTessearctOcr(imageFilename);
-    }
+    enum int existsTesseractOcr = 0;
   }
 
   private static bool getExistsTesseractOcr()
@@ -35,15 +24,25 @@ class CharacterRecognition
     return result;
   }
 
+class CharacterRecognition
+{
+  public void recognize(string imageFilename)
+  {
+    if (1 == existsTesseractOcr)
+    {
+      recognizeUsingTessearctOcr(imageFilename);
+    }
+  }
+
   private string getFilenameForOcr(string imageFilename)
   {
     string result = "";
-    int position = std.string.lastIndexOf(imageFilename, "/");
+    int position = std.string.lastIndexOf(imageFilename, ".");
     if (position >= 0)
     {
       string filename = imageFilename;
-      std.array.replaceInPlace(filename, position, position + 1, "/_");
-      Log.info("_ name '%s'.", filename);
+      std.array.replaceInPlace(filename, position, position + 1, "_.");
+      Log.info("dot name '%s'.", filename);
       result = filename;
     }
     return result;
@@ -54,6 +53,7 @@ class CharacterRecognition
     string imageDescriptionFilename = std.string.format("%s.txt", imageFilename);
     if (!std.file.exists(imageDescriptionFilename))
     {
+      Log.info("wee %s.", imageFilename);
       string ocrFilename = std.string.format("%s.txt", getFilenameForOcr(imageFilename));
       if (!std.file.exists(ocrFilename))
       {
