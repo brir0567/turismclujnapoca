@@ -1,6 +1,6 @@
 # basic makefile for D language
 DCC = dmd
-DCCFLAGS = -gc -J/usr/local/bin
+DCCFLAGS = -gc -J/usr/local/bin -J.
 LIBS = #-L-lcurl
 SRC = $(wildcard *.d)
 OBJ = $(SRC:.d=.o)

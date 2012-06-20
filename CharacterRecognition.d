@@ -32,6 +32,10 @@ class CharacterRecognition
     {
       recognizeUsingTessearctOcr(imageFilename);
     }
+    else
+    {
+      Log.error("Could not find tesseract binary file.");
+    }
   }
 
   private string getFilenameForOcr(string imageFilename)
