@@ -30,7 +30,7 @@ class CharacterRecognition
   {
     if (1 == existsTesseractOcr)
     {
-      recognizeUsingTessearctOcr(imageFilename);
+      recognizeUsingTesseractOcr(imageFilename);
       Log.info("Tesseract binary was found.");
     }
     else
@@ -53,7 +53,7 @@ class CharacterRecognition
     return result;
   }
 
-  private void recognizeUsingTessearctOcr(string imageFilename)
+  private void recognizeUsingTesseractOcr(string imageFilename)
   {
     string imageDescriptionFilename = std.string.format("%s.txt", imageFilename);
     if (!std.file.exists(imageDescriptionFilename))
